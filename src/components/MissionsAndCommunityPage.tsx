@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Target, Lock, CheckCircle, Sparkles, Camera, Scan, Users, Trophy, MapPin, Heart, MessageCircle, Share2, Globe } from 'lucide-react';
-import mapImage from 'figma:asset/2d4ec5397c951fdaf4b8b789f66d16a496aed1c5.png';
+//import mapImage from '../assets/2d4ec5397c951fdaf4b8b789f66d16a496aed1c5.png';
+const mapImage = new URL('../assets/2d4ec539c951fdaf4b8b789f66d16a496aed1c5.png', import.meta.url).href;
 
 interface Activity {
   id: string;
@@ -19,11 +20,6 @@ interface MissionsAndCommunityPageProps {
 export function MissionsAndCommunityPage({ userPoints, activities, onCompleteTask }: MissionsAndCommunityPageProps) {
   const [activeSection, setActiveSection] = useState<'missions' | 'challenges' | 'feed' | 'impact'>('missions');
   const [selectedMission, setSelectedMission] = useState<string | null>(null);
-  const [showScanModal, setShowScanModal] = useState(false);
-  const [showPhotoModal, setShowPhotoModal] = useState(false);
-  const [showInsightsModal, setShowInsightsModal] = useState(false);
-  const [scanResult, setScanResult] = useState<any>(null);
-  const [photoResult, setPhotoResult] = useState<any>(null);
   const [showJoinModal, setShowJoinModal] = useState(false);
   const [selectedChallenge, setSelectedChallenge] = useState<any>(null);
 
@@ -219,39 +215,9 @@ export function MissionsAndCommunityPage({ userPoints, activities, onCompleteTas
     wasteReduced: 37704,
   };
 
-  const handlePhotoVerification = () => {
-    setShowPhotoModal(true);
-    setPhotoResult(null);
-    setTimeout(() => {
-      setPhotoResult({
-        verified: true,
-        activity: 'Cycled to work',
-        points: 50,
-        confidence: 95,
-      });
-    }, 1500);
-  };
+  
 
-  const handleBarcodeScana = () => {
-    setShowScanModal(true);
-    setScanResult(null);
-    setTimeout(() => {
-      setScanResult({
-        product: 'Organic Cotton T-Shirt',
-        brand: 'EcoWear',
-        sustainabilityScore: 8.5,
-        details: {
-          carbon: 'Low carbon footprint',
-          materials: '100% organic cotton',
-          certification: 'Fair Trade Certified',
-        },
-      });
-    }, 2000);
-  };
-
-  const handleViewInsights = () => {
-    setShowInsightsModal(true);
-  };
+  
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -305,65 +271,10 @@ export function MissionsAndCommunityPage({ userPoints, activities, onCompleteTas
       {/* Missions Tab */}
       {activeSection === 'missions' && (
         <div>
-          {/* Advanced Features Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {/* Barcode Scanner */}
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <Scan className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-gray-900">Barcode Scanner</h3>
-                  <span className="text-gray-600">Check product sustainability</span>
-                </div>
-              </div>
-              <button
-                onClick={handleBarcodeScana}
-                className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Scan Product
-              </button>
-            </div>
+          
 
-            {/* Photo Verification */}
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center">
-                  <Camera className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-gray-900">Photo Verification</h3>
-                  <span className="text-gray-600">Verify activities with AI</span>
-                </div>
-              </div>
-              <button
-                onClick={handlePhotoVerification}
-                className="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors"
-              >
-                Upload Photo
-              </button>
-            </div>
 
-            {/* AI Tips */}
-            <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6 border border-yellow-200">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center">
-                  <Sparkles className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-gray-900">AI Insights</h3>
-                  <span className="text-gray-600">Personalized suggestions</span>
-                </div>
-              </div>
-              <button
-                onClick={handleViewInsights}
-                className="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 transition-colors"
-              >
-                View Insights
-              </button>
-            </div>
-          </div>
+            
 
           {/* AI Tips Section */}
           <div className="mb-8">
@@ -677,120 +588,12 @@ export function MissionsAndCommunityPage({ userPoints, activities, onCompleteTas
         </div>
       )}
 
-      {/* Scan Result Modal */}
-      {showScanModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl p-6 max-w-md w-full">
-            <h2 className="text-gray-900 mb-4">Sustainability Rating</h2>
-            
-            {!scanResult ? (
-              <div className="text-center py-8">
-                <Scan className="w-16 h-16 text-blue-600 mx-auto mb-4 animate-pulse" />
-                <p className="text-gray-600">Scanning product...</p>
-              </div>
-            ) : (
-              <div>
-                <div className="text-center mb-6">
-                  <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-green-600">{scanResult.sustainabilityScore}/10</span>
-                  </div>
-                  <h3 className="text-gray-900 mb-1">{scanResult.product}</h3>
-                  <p className="text-gray-600">{scanResult.brand}</p>
-                </div>
+      
+             
 
-                <div className="space-y-3 mb-6">
-                  <div className="p-3 bg-green-50 rounded-lg">
-                    <div className="text-gray-900 mb-1">Carbon Footprint</div>
-                    <span className="text-gray-600">{scanResult.details.carbon}</span>
-                  </div>
-                  <div className="p-3 bg-blue-50 rounded-lg">
-                    <div className="text-gray-900 mb-1">Materials</div>
-                    <span className="text-gray-600">{scanResult.details.materials}</span>
-                  </div>
-                  <div className="p-3 bg-yellow-50 rounded-lg">
-                    <div className="text-gray-900 mb-1">Certification</div>
-                    <span className="text-gray-600">{scanResult.details.certification}</span>
-                  </div>
-                </div>
+      
 
-                <button
-                  onClick={() => {
-                    setShowScanModal(false);
-                    setScanResult(null);
-                  }}
-                  className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors"
-                >
-                  Close
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Photo Result Modal */}
-      {showPhotoModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl p-6 max-w-md w-full">
-            <h2 className="text-gray-900 mb-4">Activity Verification</h2>
-            
-            {!photoResult ? (
-              <div className="text-center py-8">
-                <Camera className="w-16 h-16 text-purple-600 mx-auto mb-4 animate-pulse" />
-                <p className="text-gray-600">Verifying photo...</p>
-              </div>
-            ) : (
-              <div>
-                <div className="text-center mb-6">
-                  <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-green-600">{photoResult.confidence}% Confidence</span>
-                  </div>
-                  <h3 className="text-gray-900 mb-1">{photoResult.activity}</h3>
-                  <p className="text-gray-600">+{photoResult.points} Points</p>
-                </div>
-
-                <button
-                  onClick={() => {
-                    setShowPhotoModal(false);
-                    setPhotoResult(null);
-                  }}
-                  className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors"
-                >
-                  Close
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* AI Insights Modal */}
-      {showInsightsModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl p-6 max-w-md w-full">
-            <h2 className="text-gray-900 mb-4">AI Insights</h2>
-            
-            <div className="space-y-3 mb-6">
-              {aiTips.map((tip) => (
-                <div key={tip.id} className="bg-white rounded-xl p-6 border border-gray-200">
-                  <div className="text-4xl mb-3">{tip.icon}</div>
-                  <h3 className="text-gray-900 mb-2">{tip.title}</h3>
-                  <p className="text-gray-600">{tip.tip}</p>
-                </div>
-              ))}
-            </div>
-
-            <button
-              onClick={() => {
-                setShowInsightsModal(false);
-              }}
-              className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+      
 
       {/* Join Challenge Modal */}
       {showJoinModal && (

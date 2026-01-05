@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Leaf, Home, TrendingUp, Plus, Gift, User, Settings, LogOut, Users, Target } from 'lucide-react';
+import { Leaf, Home, TrendingUp, Plus, Gift, Users, Target } from 'lucide-react';
 
 type Page = 'home' | 'impact' | 'log' | 'missions-community' | 'rewards';
 
@@ -9,7 +9,7 @@ interface HeaderProps {
 }
 
 export function Header({ currentPage, onNavigate }: HeaderProps) {
-  const [showAccountMenu, setShowAccountMenu] = useState(false);
+  
 
   const navItems = [
     { id: 'home' as Page, label: 'Home', icon: Home },
@@ -52,28 +52,7 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
             })}
           </nav>
 
-          {/* Account Menu */}
-          <div className="relative">
-            <button
-              onClick={() => setShowAccountMenu(!showAccountMenu)}
-              className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center hover:shadow-lg transition-all text-white"
-            >
-              <User className="w-5 h-5" />
-            </button>
-
-            {showAccountMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-1">
-                <button className="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2 transition-colors">
-                  <Settings className="w-4 h-4" />
-                  Settings
-                </button>
-                <button className="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2 transition-colors">
-                  <LogOut className="w-4 h-4" />
-                  Log Out
-                </button>
-              </div>
-            )}
-          </div>
+         
         </div>
 
         {/* Mobile Navigation */}

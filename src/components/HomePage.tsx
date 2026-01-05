@@ -67,22 +67,8 @@ export function HomePage({ userPoints, streak, recentActivities, achievements, g
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* User Profile Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white shadow-lg">
-              <span>RY</span>
-            </div>
-            <div>
-              <h1 className="text-gray-900 mb-1">Hello, Ryan 👋</h1>
-              <p className="text-gray-600">ryan.smith@email.com</p>
-            </div>
-          </div>
-          <button className="p-2 hover:bg-white rounded-lg transition-colors">
-            <Sparkles className="w-6 h-6 text-yellow-500" />
-          </button>
-        </div>
+      
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {/* Main Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
